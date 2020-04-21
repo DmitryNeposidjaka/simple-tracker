@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  workspace:
+    build:
+      context: ./workspace
+      args:
+        - EXPOSE_PORT=${EXPOSE_PORT}
+    volumes:
+      - ${WORKDIR}:/opt/www
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:${MONGODB_PORT}
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
